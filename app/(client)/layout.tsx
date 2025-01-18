@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Syne, Prompt } from "next/font/google";
+import {  Prompt } from "next/font/google";
 import "../globals.css";
 
-const syne = Prompt({
+const prompt = Prompt({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
+
 
 export const metadata: Metadata = {
   title: "Big Productions",
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={syne.className}>{children}</body>
+      <body className={prompt.className}>{children}</body>
     </html>
   );
 }

@@ -11,31 +11,35 @@ import "swiper/css/pagination";
 
 // import required modules
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
-import tems from "/artists/tems.jpg";
+import SliderImage from "./SliderImage";
 
 export default function HeroSlider() {
-    
+  const artists = [
+    { artist: "Tems", imgDir: "/artists/tems.jpg" },
+    { artist: "Wizkid", imgDir: "/artists/wizkid.jpg" },
+    { artist: "Omah Lay", imgDir: "/artists/omah.jpg" },
+    { artist: "StoneBwoy", imgDir: "/artists/stonebwoy.jpg" },
+    { artist: "Davido", imgDir: "/artists/davido.jpg" },
+  ];
+
   return (
     <>
       <Swiper
         spaceBetween={30}
         loop={true}
         effect={"fade"}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         modules={[EffectFade, Navigation, Pagination, Autoplay]}
-        className="w-full border border-red-600"
+        className="w-full"
       >
-        <SwiperSlide>
-          <img src='/artists/tems.jpg' />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
+        {artists.map((artist, i) => (
+          <SwiperSlide>
+            <SliderImage artist={artist.artist} imgDir={artist.imgDir} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );
