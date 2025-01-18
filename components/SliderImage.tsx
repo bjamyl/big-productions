@@ -26,7 +26,7 @@ export default function SliderImage({
   imgDir2,
 }: SliderImageProps) {
   return (
-    <div className="flex flex-col h-[60vh] md:h-[85vh] xl:h-[90vh] xl:flex-row">
+    <div className="flex flex-col h-[70vh] md:h-[85vh] xl:h-[90vh] xl:flex-row">
       <div className="relative h-1/2 xl:w-1/2 xl:h-full ">
         <Image
           src={imgDir1}
