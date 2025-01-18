@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header>
-      <nav className="fixed top-0 w-screen z-50 px-6 py-3 lg:py-5 md:px-8 lg:px-10 xl:px-20 2xl:px-40 backdrop-blur-xl">
+      <nav className="fixed bg-black bg-opacity-20 top-0 w-screen z-50 px-6 py-3 lg:py-5 md:px-8 lg:px-10 xl:px-20 2xl:px-40 backdrop-blur-xl">
         <Menu toggle={toggle} setToggle={setToggle} />
         <div className="flex flex-row justify-between items-center">
           <Link className="z-50" href="/">
