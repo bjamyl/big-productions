@@ -12,20 +12,8 @@ import "swiper/css/pagination";
 // import required modules
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 import SliderImage from "./SliderImage";
-import HeroImages from "./HeroImages";
 
 export default function HeroSlider() {
-  const artists = [
-    { artist: "Tems", imgDir: "/artists/tems.jpg" },
-    { artist2: "Wizkid", imgDir2: "/artists/wizkid.jpg" },
-  ];
-
-  const seondArtists = [
-    { artist: "Omah Lay", imgDir: "/artists/omah.jpg" },
-    { artist: "StoneBwoy", imgDir: "/artists/stonebwoy.jpg" },
-    { artist: "Davido", imgDir: "/artists/davido.jpg" },
-  ];
-
   return (
     <>
       <div className="">
@@ -58,18 +46,6 @@ export default function HeroSlider() {
           </SwiperSlide>
         </Swiper>
       </div>
-      {/* <div className="hidden xl:block">
-        <HeroImages
-          artist1="Tems"
-          artist2="Wizkid"
-          artist3="Omah Lay"
-          artist4="Stonebwoy"
-          imgDir1="/artists/tems.jpg"
-          imgDir2="/artists/wizkid.jpg"
-          imgDir3="/artists/omah.jpg"
-          imgDir4="/artists/stonebwoy.jpg"
-        />
-      </div> */}
     </>
   );
 }
