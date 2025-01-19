@@ -1,11 +1,12 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { BeatLoader } from "react-spinners";
+import { Resend } from "resend";
 import {
   Form,
   FormControl,
@@ -16,6 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { EmailTemplate } from "./EmailTemplate";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -38,9 +41,29 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+  const [loading, setIsLoading] = useState(false);
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  async function onSubmit(formData: z.infer<typeof FormSchema>) {
+    setIsLoading(true);
+    const { data, error } = await resend.emails.send({
+      from: "Acme <onboarding@resend.dev>",
+      to: ["jamil@gmail.com"],
+      subject: "Contact Message",
+      react: EmailTemplate({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+      }),
+    });
+
+    if (error) {
+      toast("Message sending failed. Try again later");
+      setIsLoading(false);
+    }
     toast("Message sent!");
+    setIsLoading(false);
   }
 
   return (
@@ -53,7 +76,11 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input className="rounded-none" placeholder="Sarkodie" {...field} />
+                <Input
+                  className="rounded-none"
+                  placeholder="Sarkodie"
+                  {...field}
+                />
               </FormControl>
 
               <FormMessage />
@@ -67,7 +94,11 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input className="rounded-none" placeholder="rema@gmail.com" {...field} />
+                <Input
+                  className="rounded-none"
+                  placeholder="rema@gmail.com"
+                  {...field}
+                />
               </FormControl>
 
               <FormMessage />
@@ -81,7 +112,11 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Phone</FormLabel>
               <FormControl>
-                <Input className="rounded-none" placeholder="0500000000" {...field} />
+                <Input
+                  className="rounded-none"
+                  placeholder="0500000000"
+                  {...field}
+                />
               </FormControl>
 
               <FormMessage />
@@ -106,7 +141,9 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button className="rounded-none px-6 py-5" type="submit">Send message</Button>
+        <Button className="rounded-none px-6 py-5" type="submit">
+          {loading ? <BeatLoader /> : "Send message"}
+        </Button>
       </form>
     </Form>
   );
