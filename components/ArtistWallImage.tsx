@@ -12,5 +12,5 @@ export default function ArtistWallImage({ img, name }: ArtistWallImageProps) {
       <Image src={img} width={1280} height={720} alt={name} className=" brightness-50 object-cover h-full" />
       <p className="absolute bottom-5 left-4 text-white text-2xl font-bold">{name}</p>
     </div>
-  );
+  )
 }

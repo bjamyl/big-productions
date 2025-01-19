@@ -11,7 +11,7 @@ const syne = Syne({
 export default function Contact() {
   return (
     <section>
-      <div className="mx-6 py-20 md:py-32 md:mx-16 xl:mx-64">
+      <div className="mx-6 py-5 md:py-10 xl:py-32 md:mx-16 2xl:mx-64">
         <div>
           <p
             className={`text-black font-bold text-3xl md:text-4xl uppercase mb-2 lg:text-5xl ${syne.className}`}

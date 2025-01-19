@@ -41,7 +41,7 @@ export default function Services() {
   ];
   return (
     <section className="bg-[#1C1D1F]">
-      <div className="mx-6 py-20 md:py-32 md:mx-16 xl:mx-64">
+      <div className="mx-6 py-20 md:py-32 md:mx-16 2xl:mx-64">
         <div>
           <p
             className={`text-white font-bold text-3xl md:text-4xl uppercase mb-10 md:mb-16 lg:text-5xl ${syne.className}`}
