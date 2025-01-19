@@ -33,24 +33,29 @@ const FormSchema = z.object({
   }),
 });
 
+
 export function ContactForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
+      email:"",
+      phone:"",
+      message:""
     },
   });
 
   const [loading, setIsLoading] = useState(false);
-  const resend = new Resend(process.env.RESEND_API_KEY);
 
   async function onSubmit(formData: z.infer<typeof FormSchema>) {
     setIsLoading(true);
-    const { data, error } = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["jamil@gmail.com"],
-      subject: "Contact Message",
-      react: EmailTemplate({
+    const response = await fetch("/api/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to: "alhassanjamil0@gmail.com",
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -58,12 +63,16 @@ export function ContactForm() {
       }),
     });
 
-    if (error) {
-      toast("Message sending failed. Try again later");
+    const result = await response.json();
+    if (response.ok) {
+      console.log("Email sent successfully:", result);
       setIsLoading(false);
+      toast("Message sent");
+    } else {
+      console.error("Error sending email:", result);
+      setIsLoading(false);
+      toast("Message sending failed");
     }
-    toast("Message sent!");
-    setIsLoading(false);
   }
 
   return (
