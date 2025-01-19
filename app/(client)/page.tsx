@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import ArtistWall from "@/components/ArtistWall";
+import Contact from "@/components/Contact";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import Services from "@/components/Services";
@@ -15,6 +16,7 @@ export default function Home() {
       <Services />
       <ArtistWall />
       <Testimonials/>
+      <Contact/>
     </div>
   );
 }
